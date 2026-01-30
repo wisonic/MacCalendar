@@ -79,9 +79,41 @@ struct CalendarView: View {
                     else{
                         ZStack{
                             if day.is_today {
-                                Circle()
-                                    .fill(Color.red)
-                                    .frame(width: 30, height: 30, alignment: .center)
+                                ZStack {
+                                        // 主圆形背景 - 水珠效果
+                                        Circle()
+                                            .fill(
+                                                RadialGradient(
+                                                    gradient: Gradient(colors: [
+                                                        Color.red.opacity(0.9),
+                                                        Color.red,
+                                                        Color.red.darker(by: 0.15)
+                                                    ]),
+                                                    center: .center,
+                                                    startRadius: 5,
+                                                    endRadius: 15
+                                                )
+                                            )
+                                            .frame(width: 30, height: 30)
+                                            .shadow(color: Color.red.opacity(0.4), radius: 4, x: 0, y: 2)
+                                        
+                                        // 高光效果 - 模拟水珠顶部反光
+                                        Circle()
+                                            .fill(
+                                                RadialGradient(
+                                                    gradient: Gradient(colors: [
+                                                        Color.white.opacity(0.6),
+                                                        Color.white.opacity(0.2),
+                                                        Color.clear
+                                                    ]),
+                                                    center: UnitPoint(x: 0.35, y: 0.35),
+                                                    startRadius: 1,
+                                                    endRadius: 10
+                                                )
+                                            )
+                                            .frame(width: 30, height: 30)
+                                            .blendMode(.overlay)
+                                    }
                             }
                             if calendar.isDate(day.date!, equalTo: calendarManager.selectedDay, toGranularity: .day){
                                 Circle()
@@ -90,10 +122,10 @@ struct CalendarView: View {
                             }
                             if day.offday != nil {
                                 Text(day.offday == true ? "休":"班")
-                                    .font(.system(size: 11))
+                                    .font(.system(size: 9))
                                     .foregroundStyle(.white)
-                                    .frame(width: 14,height: 14)
-                                    .background(day.offday == true ? .red : .gray)
+                                    .frame(width: 12,height: 12)
+                                    .background(day.offday == true ? Color.init(hex: "#E86452") : .gray)
                                     .cornerRadius(3)
                                     .offset(x:12,y:-12)
                             }
@@ -204,5 +236,11 @@ struct EditableDateComponent: View {
         }
         
         isEditing = false
+    }
+}
+
+extension Color {
+    func darker(by percentage: Double = 0.2) -> Color {
+        return self.opacity(1 - percentage)
     }
 }
