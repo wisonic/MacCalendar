@@ -25,19 +25,29 @@ struct EventListView: View {
             VStack(alignment: .leading, spacing: 8) {
                 HStack{
                     Text("\(DateHelper.formatDate(date: calendarManager.selectedDay, format: "yyyy年MM月dd日（第w周）"))")
+                        .font(.system(size: 11)) // 默认 body 是 17，这里设为 11
+                        .foregroundColor(.secondary) // 使用系统辅助灰色，或者用 .gray
                     Spacer()
                     Text(calendarManager.selectedDayLunar)
+                        .font(.system(size: 11)) // 默认 body 是 17，这里设为 11
+                        .foregroundColor(.secondary) // 使用系统辅助灰色，或者用 .gray
                 }
-                Text("今天无日程")
-                    .frame(maxWidth: .infinity, alignment: .center)
+//                Text("今天无日程")
+//                    .frame(maxWidth: .infinity, alignment: .center)
+//                    .font(.system(size: 11)) // 默认 body 是 17，这里设为 11
+//                    .foregroundColor(.secondary) // 使用系统辅助灰色，或者用 .gray
             }
         }
         else{
             VStack(alignment: .leading, spacing: 8) {
                 HStack{
                     Text("\(DateHelper.formatDate(date: calendarManager.selectedDay, format: "yyyy年MM月dd日（第w周）"))")
+                        .font(.system(size: 11)) // 默认 body 是 17，这里设为 11
+                        .foregroundColor(.secondary) // 使用系统辅助灰色，或者用 .gray
                     Spacer()
                     Text(calendarManager.selectedDayLunar)
+                        .font(.system(size: 11)) // 默认 body 是 17，这里设为 11
+                        .foregroundColor(.secondary) // 使用系统辅助灰色，或者用 .gray
                 }
                 ScrollView {
                     VStack(alignment: .leading, spacing: 5) {

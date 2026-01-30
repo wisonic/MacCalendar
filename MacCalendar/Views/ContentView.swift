@@ -13,12 +13,14 @@ struct ContentView: View {
     var body: some View {
         VStack(spacing:0) {
             CalendarView(calendarManager: calendarManager)
-            Divider()
-                .padding([.top,.bottom],10)
+//            Divider()
+//                .padding([.top,.bottom],10)
+            DashDotLine(color: .secondary.opacity(0.5))
+                .padding([.top, .bottom], 10)
             EventListView(calendarManager: calendarManager)
         }
-        .frame(width: SettingsManager.weekNumberDisplayMode == .show ? 335 : 300)
-        .padding()
+        .frame(width: SettingsManager.weekNumberDisplayMode == .show ? 325 : 290)
+        .padding(10)
         .fixedSize()
         .overlay(
             GeometryReader{ proxy in

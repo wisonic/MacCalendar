@@ -63,11 +63,12 @@ struct CalendarView: View {
                             Text(day)
                                 .font(.system(size: 12))
                         }
-                        .frame(maxWidth: .infinity, minHeight: 35)
+                        .frame(maxWidth: .infinity, minHeight: 34)
                         .cornerRadius(6)
                     }
                 }
-            
+            Spacer()
+                .frame(height: 2)
             LazyVGrid(columns: columns, spacing: 0) {
                 ForEach(calendarManager.calendarDays, id: \.self) { day in
                     if day.is_weekNumber == true {
@@ -80,12 +81,12 @@ struct CalendarView: View {
                             if day.is_today {
                                 Circle()
                                     .fill(Color.red)
-                                    .frame(width: 35, height: 35, alignment: .center)
+                                    .frame(width: 30, height: 30, alignment: .center)
                             }
                             if calendar.isDate(day.date!, equalTo: calendarManager.selectedDay, toGranularity: .day){
                                 Circle()
                                     .fill(Color.red.opacity(0.3))
-                                    .frame(width: 35, height: 35, alignment: .center)
+                                    .frame(width: 30, height: 30, alignment: .center)
                             }
                             if day.offday != nil {
                                 Text(day.offday == true ? "休":"班")
@@ -105,7 +106,7 @@ struct CalendarView: View {
                                     .font(.system(size: 8))
                                     .foregroundColor(day.is_today ? .white : (day.is_currentMonth ? .primary : .gray.opacity(0.5)))
                             }
-                            .frame(height:35)
+                            .frame(height:30)
                             .cornerRadius(6)
                             .contentShape(Rectangle())
                             if !day.events.isEmpty {
@@ -115,7 +116,7 @@ struct CalendarView: View {
                                     .offset(y:15)
                             }
                         }
-                        .frame(width: 35, height: 35, alignment: .center)
+                        .frame(width: 30, height: 30, alignment: .center)
                         .contentShape(Circle())
                         .onTapGesture {
                             calendarManager.getSelectedDayEvents(date: day.date!)
